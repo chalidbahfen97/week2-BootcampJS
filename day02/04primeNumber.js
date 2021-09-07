@@ -3,12 +3,13 @@ function isPrimeNumber(n){
         return false;
     }
 
-    for (let i = 2 ; i < n ; i++) {
-        if (n % i === 0) {
+    for (let i = 2; i < n; i++) {
+        if (n % i === 0){
             return false;
         }
-        return true;
     }
+    
+    return true;
 }
 console.log(isPrimeNumber(2));
 console.log(isPrimeNumber(3));

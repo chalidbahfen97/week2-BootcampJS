@@ -27,7 +27,7 @@ now.setDate(now.getDate()+3);
 console.log(`booking date : ${now}`);
 
 // date time format indonesia
-console.log(`Format Date : ${new Intl.DateTimeFormat('id-ID').format(now)}`);
+console.log(`Format Date : ${new Intl.DateTimeFormat('id-ID').format}`);
 
 //compare date
 const startDate = new Date(2021,8,7);
