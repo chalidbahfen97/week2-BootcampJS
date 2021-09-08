@@ -22,3 +22,4 @@ function isArraysEqual(array1,array2) {
 
 console.log(isArraysEqual(fruitNamesA,fruitNamesB));
 console.log(isArraysEqual(fruitNamesA,fruitNamesC));
+console.log(isArraysEqual(fruitNamesC.sort(),fruitNamesD.sort()));
