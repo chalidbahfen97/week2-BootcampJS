@@ -14,4 +14,11 @@ const bigNums = nums.filter(element => element > 10);//element yang lebih tinggi
 const angka = [2,3,4,5,6,10,15];
 const byFive = angka.map(element => element * 5);
 
+//method every
+const every = angka.every(element => element % 2 === 0); //return false karena ada element yang tidak memenuhi kriteria
+
+//method some
+const some = angka.some(element => element % 2 === 0);
+
+
 console.log();
