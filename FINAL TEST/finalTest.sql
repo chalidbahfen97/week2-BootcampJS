@@ -59,19 +59,16 @@ JOIN t_agent a ON p.agent_code = a.agent_code
 WHERE p.policy_status = 'INFORCE' AND a.agent_office = 'JAKARTA'
 
 /* NO C */
-UPDATE t_agent a SET a.basic_commission = (t_policy.commission / t_policy.premium) * 100 WHERE a.agent_code = 'AG001'
-UPDATE t_agent a SET a.basic_commission = (t_policy.commission / t_policy.premium) * 100 WHERE a.agent_code = 'AG002'
-UPDATE t_agent a SET a.basic_commission = (t_policy.commission / t_policy.premium) * 100 WHERE a.agent_code = 'AG003'
-UPDATE t_agent a SET a.basic_commission = (t_policy.commission / t_policy.premium) * 100 WHERE a.agent_code = 'AG004'
-UPDATE t_agent a SET a.basic_commission = (t_policy.commission / t_policy.premium) * 100 WHERE a.agent_code = 'AG005'
+SELECT a.agent_code, a.agent_name, a.agent_office, SUM((p.commission/p.premium)*100)basic_commission
+FROM t_policy p JOIN t_agent a ON p.agent_code = a.agent_code
+GROUP BY a.agent_code, a.agent_name, a.agent_office
 
 /* NO D */
-UPDATE t_policy SET policy_due_date = policy_submit_date + INTERVAL '30 DAY' WHERE policy_number = 001
-UPDATE t_policy SET policy_due_date = policy_submit_date + INTERVAL '30 DAY' WHERE policy_number = 002
-UPDATE t_policy SET policy_due_date = policy_submit_date + INTERVAL '30 DAY' WHERE policy_number = 003
-UPDATE t_policy SET policy_due_date = policy_submit_date + INTERVAL '30 DAY' WHERE policy_number = 004
-UPDATE t_policy SET policy_due_date = policy_submit_date + INTERVAL '30 DAY' WHERE policy_number = 005
+UPDATE t_policy SET policy_due_date = policy_submit_date + 30
 
 /* NO E */
-SELECT SUM((premium * discount)/100)produksi_agent FROM t_policy
-ORDER BY produksi_agent
+SELECT * FROM(
+SELECT a.* , (premium-((premium * discount)/100))produksi_agent FROM t_policy p
+JOIN t_agent a ON p.agent_code = a.agent_code
+ORDER BY produksi_agent)t
+WHERE produksi_agent < 1000000
